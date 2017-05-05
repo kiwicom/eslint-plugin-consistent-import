@@ -27,7 +27,8 @@ module.exports = {
          * @returns {?string} the local name of the imported module
         */
         function getLocalModuleName(node) {
-            if (node.specifiers[0]) {
+            if (node.specifiers) {
+                // console.log(node.specifiers[0])
                 return node.specifiers[0].local.name;
             }
         }
@@ -38,7 +39,7 @@ module.exports = {
          * @returns {?string} the name of the module
          */
         function getModuleName(node) {
-            if (node.specifirers[0]) {
+            if (node.specifiers) {
                 return node.source.value;
             }
         }
@@ -47,10 +48,9 @@ module.exports = {
             ImportDeclaration: function(node) {
             
                 const localModule = getLocalModuleName(node);
-                const originalModulePath = getModuleName(node);
-                const originalModule = str.split("/");
+                const originalModulePath = getModuleName(node).split("/");
 
-                const isMatching = localModule.localeCompare(originalModule[originalModule.length - 1])
+                const isMatching = localModule.localeCompare(originalModulePath[originalModulePath.length - 1])
 
                 if (isMatching) {
                     context.report({
