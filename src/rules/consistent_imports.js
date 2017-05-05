@@ -27,8 +27,8 @@ module.exports = {
          * @returns {?string} the local name of the imported module
         */
         function getLocalModuleName(node) {
-            if (node.specifiers[0]){
-                return node.specifier[0].local.name;
+            if (node.specifiers[0]) {
+                return node.specifiers[0].local.name;
             }
         }
 
@@ -38,7 +38,7 @@ module.exports = {
          * @returns {?string} the name of the module
          */
         function getModuleName(node) {
-            if (node.specifirers[0]){
+            if (node.specifirers[0]) {
                 return node.source.value;
             }
         }
@@ -60,9 +60,8 @@ module.exports = {
 
                         }
                     });
-            }
-
-
-        };
+                }
+            },
+        }
     }
 };
