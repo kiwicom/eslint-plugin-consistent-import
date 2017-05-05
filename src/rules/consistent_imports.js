@@ -46,18 +46,20 @@ module.exports = {
         return {
             ImportDeclaration: function(node) {
             
-            let localModule = getLocalModuleName(node);
-            let originalModulePath = getModuleName(node);
-            let originalModule = str.split("/");
+                const localModule = getLocalModuleName(node);
+                const originalModulePath = getModuleName(node);
+                const originalModule = str.split("/");
 
-            if(localModule.localeCompare(originalModule[originalModule.length - 1])){
-                context.report({
-                    node,
-                    message: '',
-                    data: {
+                const isMatching = localModule.localeCompare(originalModule[originalModule.length - 1])
 
-                    }
-                });
+                if (isMatching) {
+                    context.report({
+                        node,
+                        message: '',
+                        data: {
+
+                        }
+                    });
             }
 
 
