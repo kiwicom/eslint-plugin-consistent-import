@@ -15,11 +15,11 @@ module.exports = {
             recommended: true
         },
 
-        fixable: "code"
+        fixable: "code",
 
     },
 
-    create: function create(context) {
+    create(context) {
 
         /**
          * Get the local name of imported module
@@ -45,21 +45,23 @@ module.exports = {
         }
 
         return {
-            ImportDeclaration: function ImportDeclaration(node) {
+            ImportDeclaration: function(node) {
+            
+                const localModule = getLocalModuleName(node);
+                const originalModulePath = getModuleName(node).split("/");
 
-                var localModule = getLocalModuleName(node);
-                var originalModulePath = getModuleName(node).split("/");
-
-                var isMatching = localModule.localeCompare(originalModulePath[originalModulePath.length - 1]);
+                const isMatching = localModule.localeCompare(originalModulePath[originalModulePath.length - 1])
 
                 if (isMatching) {
                     context.report({
-                        node: node,
+                        node,
                         message: '',
-                        data: {}
+                        data: {
+
+                        }
                     });
                 }
-            }
-        };
+            },
+        }
     }
 };
