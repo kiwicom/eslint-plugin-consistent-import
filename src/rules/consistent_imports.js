@@ -55,11 +55,12 @@ module.exports = {
                 if (isMatching) {
                     context.report({
                         node,
-                        message: '',
+                        message: '{{syntaxA}} is not consistent with {{syntaxB}}',
                         data: {
+                            syntaxA: localModule,
+                            syntaxB: originalModulePath[originalModulePath.length - 1]
 
-                        }
-                    });
+                        });
                 }
             },
         }
