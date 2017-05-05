@@ -1,3 +1,10 @@
 /**
- * Created by ferko on 4.5.17.
+ * Created by Frantisek Farkas on 4.5.17.
  */
+
+
+// TYPES
+
+
+
+
