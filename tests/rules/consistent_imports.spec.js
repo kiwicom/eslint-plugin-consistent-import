@@ -1,4 +1,4 @@
-const rule = require("../../src/rules/consistent_imports")
+const rule = require("../../src/rules/consistent_require")
 const RuleTester = require("eslint").RuleTester
 
 const parserOptions = {
@@ -27,6 +27,10 @@ const suggestionTests = {
             code: "import BookingDuck from '../../BookingDuck'",
 			parserOptions,
 		},
+		{
+			code: "import BookingDuck from '../../BookingDuck.js'",
+			parserOptions,
+		}
 
 	],
 	invalid: [
@@ -44,4 +48,4 @@ const suggestionTests = {
 }
 
 const ruleTester = new RuleTester()
-ruleTester.run("consistent_imports", rule, suggestionTests)
+ruleTester.run("consistent_require", rule, suggestionTests)

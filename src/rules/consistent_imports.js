@@ -49,18 +49,24 @@ module.exports = {
             
                 const localModule = getLocalModuleName(node);
                 const originalModulePath = getModuleName(node).split("/");
+                
+                const moduleWithoutExtension = originalModulePath[originalModulePath.length - 1].split(".")[0]
 
-                const isMatching = localModule.localeCompare(originalModulePath[originalModulePath.length - 1])
+                const isMatching = localModule.localeCompare(moduleWithoutExtension)
 
                 if (isMatching) {
                     context.report({
                         node,
-                        message: '',
+                        message: '{{syntaxA}} is not consistent with {{syntaxB}}',
                         data: {
+                            syntaxA: localModule,
+                            syntaxB: moduleWithoutExtension
 
                         }
                     });
-                }
+                }            
+                
+                
             },
         }
     }
