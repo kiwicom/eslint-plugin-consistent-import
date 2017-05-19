@@ -25,11 +25,7 @@ module.exports = {
          * Get the local name of imported module
          * @param {ASTNode} node - the ImportDeclaration node
          * @returns {?string} the local name of the imported module
-<<<<<<< HEAD
-        */
-=======
          */
->>>>>>> d11f83baaa460db3781b60a6cbc934ade159d379
         function getLocalModuleName(node) {
             if (node.specifiers) {
                 // console.log(node.specifiers[0])
@@ -50,22 +46,15 @@ module.exports = {
 
         return {
             ImportDeclaration: function(node) {
-<<<<<<< HEAD
-            
-                const localModule = getLocalModuleName(node);
-                const originalModulePath = getModuleName(node).split("/");
-                
-=======
 
                 const localModule = getLocalModuleName(node);
                 const originalModulePath = getModuleName(node).split("/");
 
->>>>>>> d11f83baaa460db3781b60a6cbc934ade159d379
                 const moduleWithoutExtension = originalModulePath[originalModulePath.length - 1].split(".")[0]
+                
+                const isMatching = localModule === moduleWithoutExtension
 
-                const isMatching = localModule.localeCompare(moduleWithoutExtension)
-
-                if (isMatching) {
+                if (!isMatching) {
                     context.report({
                         node,
                         message: '{{syntaxA}} is not consistent with {{syntaxB}}',
@@ -75,15 +64,9 @@ module.exports = {
 
                         }
                     });
-<<<<<<< HEAD
-                }            
-                
-                
-=======
                 }
 
 
->>>>>>> d11f83baaa460db3781b60a6cbc934ade159d379
             },
         }
     }

@@ -1,4 +1,4 @@
-const rule = require("../../src/rules/consistent_imports")
+const rule = require("../../src/rules/consistent_require")
 const RuleTester = require("eslint").RuleTester
 
 const parserOptions = {
@@ -20,33 +20,36 @@ const importErrors = [
 const suggestionTests = {
 	valid: [
 		{
-            code: "let BookingDuck = require(dir/dir/BookingDuck)",
+            code: "let BookingDuck = require('../../BookingDuck')",
             parserOptions,
         },
         {
-            code: "var BookingDuck = require(dir/dir/BookingDuck)",
+            code: "var BookingDuck = require('../../BookingDuck')",
             parserOptions,
         },
 		{
-			code: "const BookingDuck = require(dir/dir/BookingDuck)",
+			code: "const BookingDuck = require('../../BookingDuck')",
 			parserOptions
 		},
 	],
 	invalid: [
 		{
-            code: "let BookingDuck = require(dir/dir/Duck)",
+            code: "let BookingDuck = require('../../Duck')",
             parserOptions,
+			error: importErrors
         },
         {
-            code: "var BookingDuck = require(dir/dir/Duck)",
+            code: "var BookingDuck = require('../../Duck')",
             parserOptions,
+			error: importErrors
         },
 		{
-			code: "const BookingDuck = require(dir/dir/Duck)",
-			parserOptions
+			code: "const BookingDuck = require('../../Duck')",
+			parserOptions,
+			error: importErrors
 		}
 	],
 }
 
 const ruleTester = new RuleTester()
-ruleTester.run("consistent_imports", rule, suggestionTests)
+ruleTester.run("consistent_require", rule, suggestionTests)
