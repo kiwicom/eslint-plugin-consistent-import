@@ -19,17 +19,17 @@ module.exports = {
 
     },
 
-    create(context) {         
-        
+    create(context) {
+
         /**
          * Get the local name of imported module
          * @param {ASTNode} node - the ImportDeclaration node
          * @returns {?string} the local name of the imported module
-        */
+         */
         function getModuleName(node) {
             let tmp = node.declarations[0].init.arguments[0].value
             let arr = tmp.split("/")
-            
+
             return arr[arr.length - 1];
 
         }
@@ -38,39 +38,38 @@ module.exports = {
          * Get the local name of imported module
          * @param {ASTNode} node - the ImportDeclaration node
          * @returns {?string} the local name of the imported module
-        */
-        function getVariableName(node) {            
+         */
+        function getVariableName(node) {
             return node.declarations[0].id.name;
-        }       
-            
-        
+        }
+
+
         return {
-           VariableDeclaration: function(node){   
-                            
-               if (node.declarations[0].init.callee.name == "require"){
-                            
+            VariableDeclaration: function (node) {
+
+                if (node.declarations[0].init.callee.name == "require") {
+
                     const variableName = getVariableName(node);
-                
-                    
-                    const moduleName = getModuleName(node);                    
+
+                    const moduleName = getModuleName(node);
 
                     const isMatching = variableName === moduleName;
-                    
-                    if(!isMatching) {
+
+                    if (!isMatching) {
                         context.report({
                             node,
-                            message: '{{syntaxA}} is consistent with {{syntaxB}}',
+                            message: '{{syntaxA}} is not consistent with {{syntaxB}}',
                             data: {
                                 syntaxA: variableName,
                                 syntaxB: moduleName
 
-                        }
-                    });
-                  }
-                  
-               }
-               
-           }
+                            }
+                        });
+                    }
+
+                }
+
+            }
         }
     }
 };

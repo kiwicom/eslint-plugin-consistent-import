@@ -36,17 +36,26 @@ const suggestionTests = {
 		{
             code: "let BookingDuck = require('../../Duck')",
             parserOptions,
-			error: importErrors
+			errors: [{
+				type: "VariableDeclaration",
+				message: "BookingDuck is not consistent with Duck"
+			}]
         },
         {
             code: "var BookingDuck = require('../../Duck')",
             parserOptions,
-			error: importErrors
+			errors: [{
+				type: "VariableDeclaration",
+				message: "BookingDuck is not consistent with Duck"
+			}]
         },
 		{
 			code: "const BookingDuck = require('../../Duck')",
 			parserOptions,
-			error: importErrors
+			errors: [{
+				type: "VariableDeclaration",
+				message: "BookingDuck is not consistent with Duck"
+			}]
 		}
 	],
 }

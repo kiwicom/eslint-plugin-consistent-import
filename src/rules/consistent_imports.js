@@ -45,13 +45,13 @@ module.exports = {
         }
 
         return {
-            ImportDeclaration: function(node) {
+            ImportDeclaration: function (node) {
 
                 const localModule = getLocalModuleName(node);
                 const originalModulePath = getModuleName(node).split("/");
 
                 const moduleWithoutExtension = originalModulePath[originalModulePath.length - 1].split(".")[0]
-                
+
                 const isMatching = localModule === moduleWithoutExtension
 
                 if (!isMatching) {
@@ -65,7 +65,6 @@ module.exports = {
                         }
                     });
                 }
-
 
             },
         }
